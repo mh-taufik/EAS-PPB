@@ -19,7 +19,7 @@
             android:name=".NewsActivity"
             android:exported="false" />
         <activity
-            android:name=".ShowActivity"
+            android:name=".NewsDetailActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

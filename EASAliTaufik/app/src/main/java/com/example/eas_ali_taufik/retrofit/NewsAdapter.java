@@ -13,8 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.eas_ali_taufik.NewsActivity;
+import com.example.eas_ali_taufik.NewsDetailActivity;
 import com.example.eas_ali_taufik.R;
-import com.example.eas_ali_taufik.ShowActivity;
 import com.example.eas_ali_taufik.pojo.News;
 import com.squareup.picasso.Picasso;
 
@@ -37,7 +38,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NewsViewHolder holder, int pos) {
+        int position = pos;
         Picasso.get().load(dataNews.get(position).getUrlToImage()).into(holder.mImages);
         holder.mTitle.setText(dataNews.get(position).getTitle());
         holder.mPublishTime.setText(dataNews.get(position).getPublishedAt());
@@ -46,8 +48,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(intent);
+                Intent intent = new Intent(context, NewsDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("images",dataNews.get(position).getUrlToImage());
+                bundle.putString("title",dataNews.get(position).getTitle());
+                bundle.putString("publish_time",dataNews.get(position).getPublishedAt());
+                bundle.putString("publisher",dataNews.get(position).getSource().getName());
+                bundle.putString("author",dataNews.get(position).getAuthor());
+                bundle.putString("content",dataNews.get(position).getContent());
+                bundle.putString("link",dataNews.get(position).getUrl());
+                intent.putExtra("news",bundle);
+                context.startActivity(intent);
             }
         });
     }
