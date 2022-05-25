@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Koding/Github/EAS-PPB/EASAliTaufik/app/src/main/res/layout/activity_main.xml" value="0.1638888888888889" />
+        <entry key="..\:/Koding/Github/EAS-PPB/EASAliTaufik/app/src/main/res/layout/activity_news_detail.xml" value="0.25" />
+        <entry key="..\:/Koding/Github/EAS-PPB/EASAliTaufik/app/src/main/res/layout/activity_show.xml" value="0.1" />
         <entry key="..\:/Users/Taufik/AndroidStudioProjects/EASAliTaufik/app/src/main/res/drawable/ic_description.xml" value="0.1945" />
         <entry key="..\:/Users/Taufik/AndroidStudioProjects/EASAliTaufik/app/src/main/res/drawable/ic_publish.xml" value="0.1945" />
         <entry key="..\:/Users/Taufik/AndroidStudioProjects/EASAliTaufik/app/src/main/res/drawable/ic_time.xml" value="0.1945" />

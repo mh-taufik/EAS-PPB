@@ -2,7 +2,6 @@ package com.example.eas_ali_taufik.retrofit;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.eas_ali_taufik.NewsDetailActivity;
 import com.example.eas_ali_taufik.R;
-import com.example.eas_ali_taufik.ShowActivity;
 import com.example.eas_ali_taufik.pojo.News;
 import com.squareup.picasso.Picasso;
 
@@ -46,8 +45,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(intent);
+                Intent intent = new Intent(context, NewsDetailActivity.class);
+                News news = dataNews.get(position);
+                intent.putExtra("images",news.getUrlToImage());
+                intent.putExtra("title",news.getTitle());
+                intent.putExtra("publish_time",news.getPublishedAt());
+                intent.putExtra("publisher",news.getSource().getName());
+                intent.putExtra("author",news.getAuthor());
+                intent.putExtra("content",news.getContent());
+                intent.putExtra("link",news.getUrl());
+                context.startActivity(intent);
             }
         });
     }
