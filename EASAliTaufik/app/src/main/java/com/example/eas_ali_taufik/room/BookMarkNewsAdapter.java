@@ -1,4 +1,4 @@
-package com.example.eas_ali_taufik.retrofit;
+package com.example.eas_ali_taufik.room;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,38 +16,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eas_ali_taufik.NewsDetailActivity;
 import com.example.eas_ali_taufik.R;
-import com.example.eas_ali_taufik.pojo.News;
-import com.example.eas_ali_taufik.room.AppDatabase;
-import com.example.eas_ali_taufik.room.BookMarkNews;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
-    private List<News> dataNews;
+public class BookMarkNewsAdapter extends RecyclerView.Adapter<BookMarkNewsAdapter.BookMarkViewHolder>{
+    private List<BookMarkNews> dataNews;
     private Context context;
     private AppDatabase database;
 
-    public NewsAdapter(List<News> data, Context context) {
+    public BookMarkNewsAdapter(List<BookMarkNews> data, Context context) {
         this.dataNews = data;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BookMarkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_news, parent, false);
-        return new NewsViewHolder(view);
+        return new BookMarkViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Picasso.get().load(dataNews.get(position).getUrlToImage()).into(holder.mImages);
+    public void onBindViewHolder(@NonNull BookMarkViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        Picasso.get().load(dataNews.get(position).getImage()).into(holder.mImages);
         holder.mTitle.setText(dataNews.get(position).getTitle());
-        holder.mPublishTime.setText(dataNews.get(position).getPublishedAt());
-        holder.mPublisher.setText(dataNews.get(position).getSource().getName());
-        holder.mContent.setText(dataNews.get(position).getDescription());
+        holder.mPublishTime.setText(dataNews.get(position).getPublishtime());
+        holder.mPublisher.setText(dataNews.get(position).getPublisher());
+        holder.mContent.setText(dataNews.get(position).getContent());
         database = AppDatabase.getInstance(context.getApplicationContext());
         BookMarkNews bookMarkNews = database.bookMarkNewsDao().get(dataNews.get(position).getTitle());
         if(bookMarkNews != null){
@@ -60,7 +57,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             if(isChecked){
                 switch (checkedId){
                     case R.id.buttonBookMark:
-                        database.bookMarkNewsDao().insertAll(dataNews.get(position).getTitle(),dataNews.get(position).getSource().getName(),dataNews.get(position).getUrlToImage(),dataNews.get(position).getPublishedAt(),dataNews.get(position).getDescription(),dataNews.get(position).getAuthor(),dataNews.get(position).getUrl());
+                        database.bookMarkNewsDao().insertAll(dataNews.get(position).getTitle(),dataNews.get(position).publisher,dataNews.get(position).getImage(),dataNews.get(position).getPublishtime(),dataNews.get(position).getContent(),dataNews.get(position).getAuthor(),dataNews.get(position).getUrl());
                         Log.d("TAG", "onBindViewHolder: bookmark checked"+checkedId);
                 }
             }else {
@@ -76,11 +73,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, NewsDetailActivity.class);
-                News news = dataNews.get(position);
-                intent.putExtra("images",news.getUrlToImage());
+                BookMarkNews news = dataNews.get(position);
+                intent.putExtra("images",news.getImage());
                 intent.putExtra("title",news.getTitle());
-                intent.putExtra("publish_time",news.getPublishedAt());
-                intent.putExtra("publisher",news.getSource().getName());
+                intent.putExtra("publish_time",news.getPublishtime());
+                intent.putExtra("publisher",news.getPublisher());
                 intent.putExtra("author",news.getAuthor());
                 intent.putExtra("content",news.getContent());
                 intent.putExtra("link",news.getUrl());
@@ -94,13 +91,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         return dataNews.size();
     }
 
-    public class NewsViewHolder extends RecyclerView.ViewHolder {
+
+    public class BookMarkViewHolder extends RecyclerView.ViewHolder {
         private ImageView mImages;
         private TextView mTitle, mPublishTime, mPublisher, mContent;
         private ConstraintLayout mLayout;
         private MaterialButtonToggleGroup mTG;
-
-        public NewsViewHolder(@NonNull View itemView) {
+        public BookMarkViewHolder(@NonNull View itemView) {
             super(itemView);
             mImages = itemView.findViewById(R.id.news_images);
             mTitle = itemView.findViewById(R.id.news_title);
@@ -108,6 +105,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             mPublisher = itemView.findViewById(R.id.detail_publish_time);
             mContent = itemView.findViewById(R.id.detail_publisher);
             mLayout = itemView.findViewById(R.id.news_layout);
+
             mTG = itemView.findViewById(R.id.toggleButtonGroup);
         }
     }
