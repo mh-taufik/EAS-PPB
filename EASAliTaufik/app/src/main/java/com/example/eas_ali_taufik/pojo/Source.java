@@ -2,13 +2,13 @@ package com.example.eas_ali_taufik.pojo;
 
 public class Source{
 	private String name;
-	private int id;
+	private String id;
 
 	public String getName(){
 		return name;
 	}
 
-	public int getId(){
+	public String getId(){
 		return id;
 	}
 

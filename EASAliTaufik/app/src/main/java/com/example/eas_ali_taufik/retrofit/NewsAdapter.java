@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -65,9 +66,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 }
             }else {
                 if (group.getCheckedButtonId() == View.NO_ID){
-                    if(bookMarkNews.getTitle()!=null){
+//                    if(bookMarkNews.getTitle()!=null){
                         database.bookMarkNewsDao().delete(bookMarkNews);
-                    }
+//                    }
                     Log.d("TAG", "onBindViewHolder: bookmark uncheked");
                 }
             }
@@ -100,6 +101,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         private ConstraintLayout mLayout;
         private MaterialButtonToggleGroup mTG;
 
+
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
             mImages = itemView.findViewById(R.id.news_images);
@@ -108,7 +110,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             mPublisher = itemView.findViewById(R.id.detail_publish_time);
             mContent = itemView.findViewById(R.id.detail_publisher);
             mLayout = itemView.findViewById(R.id.news_layout);
+
             mTG = itemView.findViewById(R.id.toggleButtonGroup);
+
+
+
+
         }
     }
 }

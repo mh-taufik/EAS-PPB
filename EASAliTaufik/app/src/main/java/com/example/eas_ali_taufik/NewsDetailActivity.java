@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,14 +35,6 @@ public class NewsDetailActivity extends AppCompatActivity {
             mAuthor.setText(intent.getStringExtra("author"));
             mContent.setText(intent.getStringExtra("content"));
             mLink.setText(intent.getStringExtra("link"));
-            mLink.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), NewsActivity.class);
-                    intent.putExtra("link",mLink.getText().toString());
-                    startActivity(intent);
-                }
-            });
         }
     }
 }

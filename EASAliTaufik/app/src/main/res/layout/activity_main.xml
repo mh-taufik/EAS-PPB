@@ -6,12 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/searchKey"
+            android:layout_width="421dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:hint="Search"
+            android:textColor="#757575" />
+
+        <RadioGroup
+            android:id="@+id/sortBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/sortPopularity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Populer" />
+
+            <RadioButton
+                android:id="@+id/sortPublishedAt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Terbaru" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/opsiNegara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/negaraId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Indonesia" />
+
+            <RadioButton
+                android:id="@+id/negaraAu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Australia" />
+
+            <RadioButton
+                android:id="@+id/negaraUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="United State" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/filterbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="filter" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_news"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

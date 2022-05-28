@@ -26,6 +26,7 @@ public class BookMarkNewsAdapter extends RecyclerView.Adapter<BookMarkNewsAdapte
     private Context context;
     private AppDatabase database;
 
+
     public BookMarkNewsAdapter(List<BookMarkNews> data, Context context) {
         this.dataNews = data;
         this.context = context;
@@ -35,7 +36,7 @@ public class BookMarkNewsAdapter extends RecyclerView.Adapter<BookMarkNewsAdapte
     @Override
     public BookMarkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_news, parent, false);
-        return new BookMarkViewHolder(view);
+        return new BookMarkNewsAdapter.BookMarkViewHolder(view);
     }
 
     @Override

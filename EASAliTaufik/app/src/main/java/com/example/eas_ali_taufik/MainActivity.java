@@ -11,6 +11,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.example.eas_ali_taufik.pojo.News;
 import com.example.eas_ali_taufik.pojo.NewsResponse;
@@ -26,6 +30,11 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private List<News> listNews;
     private NewsAdapter adapter;
+    private RadioGroup opsiNegara;
+    private RadioGroup opsiSort;
+    private EditText opsiSearch;
+    private Button filterButton;
+    private String fNegara,fSort,fSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +56,80 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Failure" ,t.getMessage());
             }
         });
+        fNegara = "id";
+        fSort = "";
+        opsiNegara = findViewById(R.id.opsiNegara);
+        opsiSort = findViewById(R.id.sortBy);
+        opsiSearch = findViewById(R.id.searchKey);
+        filterButton = findViewById(R.id.filterbutton);
+
+        opsiNegara.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.negaraId:
+                        fNegara = "id";
+                        break;
+                    case R.id.negaraAu:
+                        fNegara = "au";
+                        break;
+                    case R.id.negaraUs:
+                        fNegara = "us";
+                        break;
+                    default:
+                        fNegara = "id";
+                        break;
+                }
+            }
+        });
+
+        opsiSort.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.sortPopularity:
+                        fSort = "popularity";
+                        break;
+                    case R.id.sortPublishedAt:
+                        fSort= "publishedAt";
+                        break;
+                    default:
+                        fSort = "";
+                        break;
+                }
+            }
+        });
+
+
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fSearch = opsiSearch.getText().toString();
+                if(fSearch==null){
+                    fSearch = "";
+                }
+                Log.d("TAG", "onClick: "+fSearch+" "+fNegara+" "+fSort);
+                RestClient.getService().getFiltersNews(fSearch,fNegara,fSort).enqueue(new Callback<NewsResponse>() {
+                    @Override
+                    public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                        Log.d("res",response.body().toString());
+                        listNews = response.body().getArticles();
+                        adapter = new NewsAdapter(listNews, MainActivity.this);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        recyclerView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<NewsResponse> call, Throwable t) {
+                        Log.d("Failure" ,t.getMessage());
+                    }
+                });
+            }
+        });
+
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
