@@ -28,7 +28,7 @@
             android:name=".NewsDetailActivity"
             android:exported="false" />
         <activity
-            android:label="Home"
+            android:label="Berita Kan?"
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>

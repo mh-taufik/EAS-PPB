@@ -40,19 +40,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
         fNegara = "id";
         fSort = "";
+        fSearch = "";
         opsiNegara = findViewById(R.id.opsiNegara);
         opsiSort = findViewById(R.id.sortBy);
         opsiSearch = findViewById(R.id.searchKey);
         filterButton = findViewById(R.id.filterbutton);
-
-
-
-
     }
 
     @Override
@@ -60,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.d("TAG", "onResume: ");
         RecyclerView recyclerView = findViewById(R.id.rv_news);
-        RestClient.getService().getAllNews().enqueue(new Callback<NewsResponse>() {
+        RestClient.getService().getFiltersNews(fSearch,fNegara,fSort).enqueue(new Callback<NewsResponse>() {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                Log.d("res",response.body().toString());
                 listNews = response.body().getArticles();
                 adapter = new NewsAdapter(listNews, MainActivity.this);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -74,6 +69,20 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Failure" ,t.getMessage());
             }
         });
+//        RestClient.getService().getAllNews().enqueue(new Callback<NewsResponse>() {
+//            @Override
+//            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+//                listNews = response.body().getArticles();
+//                adapter = new NewsAdapter(listNews, MainActivity.this);
+//                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//                recyclerView.setAdapter(adapter);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NewsResponse> call, Throwable t) {
+//                Log.d("Failure" ,t.getMessage());
+//            }
+//        });
         opsiNegara.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -84,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.negaraAu:
                         fNegara = "au";
                         break;
-                    case R.id.negaraUs:
-                        fNegara = "us";
+                    case R.id.negaraJp:
+                        fNegara = "jp";
                         break;
                     default:
                         fNegara = "id";
