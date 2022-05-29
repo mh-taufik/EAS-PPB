@@ -19,6 +19,9 @@ import com.example.eas_ali_taufik.R;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class BookMarkNewsAdapter extends RecyclerView.Adapter<BookMarkNewsAdapter.BookMarkViewHolder>{
@@ -41,9 +44,13 @@ public class BookMarkNewsAdapter extends RecyclerView.Adapter<BookMarkNewsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull BookMarkViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        Log.d("TAG", "onBindViewHolder: "+dataNews.get(position).getPublishtime());
+
+        String formattedDate = dataNews.get(position).getPublishtime();
+        Log.d("TAG", "onBindViewHolder: time"+ formattedDate);
         Picasso.get().load(dataNews.get(position).getImage()).into(holder.mImages);
         holder.mTitle.setText(dataNews.get(position).getTitle());
-        holder.mPublishTime.setText(dataNews.get(position).getPublishtime());
+        holder.mPublishTime.setText(formattedDate);
         holder.mPublisher.setText(dataNews.get(position).getPublisher());
         holder.mContent.setText(dataNews.get(position).getContent());
         database = AppDatabase.getInstance(context.getApplicationContext());
@@ -102,9 +109,9 @@ public class BookMarkNewsAdapter extends RecyclerView.Adapter<BookMarkNewsAdapte
             super(itemView);
             mImages = itemView.findViewById(R.id.news_images);
             mTitle = itemView.findViewById(R.id.news_title);
-            mPublishTime = itemView.findViewById(R.id.detail_author);
-            mPublisher = itemView.findViewById(R.id.detail_publish_time);
-            mContent = itemView.findViewById(R.id.detail_publisher);
+            mPublishTime = itemView.findViewById(R.id.news_publish_time);
+            mPublisher = itemView.findViewById(R.id.news_publisher);
+            mContent = itemView.findViewById(R.id.news_content);
             mLayout = itemView.findViewById(R.id.news_layout);
 
             mTG = itemView.findViewById(R.id.toggleButtonGroup);

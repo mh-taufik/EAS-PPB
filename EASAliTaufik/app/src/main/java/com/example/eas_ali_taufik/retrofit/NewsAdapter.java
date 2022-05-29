@@ -51,6 +51,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.mContent.setText(dataNews.get(position).getDescription());
         database = AppDatabase.getInstance(context.getApplicationContext());
         BookMarkNews bookMarkNews = database.bookMarkNewsDao().get(dataNews.get(position).getTitle());
+        if(bookMarkNews != null){
+            holder.mTG.check(R.id.buttonBookMark);
+        }else{
+            Log.d("TAG", "kosong");
+        }
 
         holder.mTG.addOnButtonCheckedListener((group, checkedId, isChecked) ->{
             if(isChecked){

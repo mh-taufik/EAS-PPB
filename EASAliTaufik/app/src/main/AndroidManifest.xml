@@ -16,15 +16,19 @@
         android:theme="@style/Theme.EASAliTaufik"
         tools:targetApi="31" >
         <activity
+            android:label="Bookmark"
             android:name=".BookmarkActivity"
             android:exported="false" />
         <activity
+            android:label="News from Web"
             android:name=".NewsActivity"
             android:exported="false" />
         <activity
+            android:label="Detail News"
             android:name=".NewsDetailActivity"
             android:exported="false" />
         <activity
+            android:label="Home"
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>

@@ -41,6 +41,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        fNegara = "id";
+        fSort = "";
+        opsiNegara = findViewById(R.id.opsiNegara);
+        opsiSort = findViewById(R.id.sortBy);
+        opsiSearch = findViewById(R.id.searchKey);
+        filterButton = findViewById(R.id.filterbutton);
+
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("TAG", "onResume: ");
         RecyclerView recyclerView = findViewById(R.id.rv_news);
         RestClient.getService().getAllNews().enqueue(new Callback<NewsResponse>() {
             @Override
@@ -56,13 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Failure" ,t.getMessage());
             }
         });
-        fNegara = "id";
-        fSort = "";
-        opsiNegara = findViewById(R.id.opsiNegara);
-        opsiSort = findViewById(R.id.sortBy);
-        opsiSearch = findViewById(R.id.searchKey);
-        filterButton = findViewById(R.id.filterbutton);
-
         opsiNegara.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -126,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
-
     }
 
     @Override
