@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1EAEA"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -22,10 +25,10 @@
             android:layout_height="53dp"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:hint="Search"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:hint="Search"
-            android:textColor="#757575" />
+            android:textColor="#1E1818" />
 
         <RadioGroup
             android:id="@+id/sortBy"
@@ -75,6 +78,7 @@
             android:id="@+id/filterbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#2196F3"
             android:text="filter" />
 
     </LinearLayout>
@@ -84,6 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
 
+        android:background="#d4d4d4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

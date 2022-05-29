@@ -51,11 +51,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.mContent.setText(dataNews.get(position).getDescription());
         database = AppDatabase.getInstance(context.getApplicationContext());
         BookMarkNews bookMarkNews = database.bookMarkNewsDao().get(dataNews.get(position).getTitle());
-        if(bookMarkNews != null){
-            holder.mTG.check(R.id.buttonBookMark);
-        }else{
-            Log.d("TAG", "kosong");
-        }
 
         holder.mTG.addOnButtonCheckedListener((group, checkedId, isChecked) ->{
             if(isChecked){
@@ -106,15 +101,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             super(itemView);
             mImages = itemView.findViewById(R.id.news_images);
             mTitle = itemView.findViewById(R.id.news_title);
-            mPublishTime = itemView.findViewById(R.id.detail_author);
-            mPublisher = itemView.findViewById(R.id.detail_publish_time);
-            mContent = itemView.findViewById(R.id.detail_publisher);
+            mPublishTime = itemView.findViewById(R.id.news_publish_time);
+            mPublisher = itemView.findViewById(R.id.news_publisher);
+            mContent = itemView.findViewById(R.id.news_content);
             mLayout = itemView.findViewById(R.id.news_layout);
 
             mTG = itemView.findViewById(R.id.toggleButtonGroup);
-
-
-
 
         }
     }
